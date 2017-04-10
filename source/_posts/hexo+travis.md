@@ -195,7 +195,7 @@ before_install
 
 ```bash
 # public 后面加上/即可将该目录下的文件都传送到服务器了
-- rsync -rv --delete -e 'ssh -p 端口号' public/ 用户@域名:/路径
+- rsync -rv --delete -e 'ssh -o stricthostkeychecking=no -p 端口号' public/ 用户@域名:/路径
 ```
 
 最后在这里放上我最终的[.travis.yml](https://github.com/Godi13/Godi13.github.io/blob/source/.travis.yml)配置参数，希望本文对大家能有所帮助
