@@ -167,7 +167,7 @@ travis encrypt-file ~/.ssh/id_rsa --add
 
 并且在`.travis.yml`里的`before_install`周期中多了下面这2行
 
-```
+```bash
 - openssl aes-256-cbc -K $encrypted_97d432d3ed20_key -iv $encrypted_97d432d3ed20_iv
   -in id_rsa.enc -out ~\/.ssh/id_rsa -d
 ```
@@ -176,7 +176,7 @@ travis encrypt-file ~/.ssh/id_rsa --add
 
 之后为了保证命令的顺利运行，我们还需要正确地设置权限和认证
 
-```yml
+```bash
 before_install
 - openssl aes-256-cbc -K $encrypted_97d432d3ed20_key -iv $encrypted_97d432d3ed20_iv
   -in id_rsa.enc -out ~/.ssh/id_rsa -d
@@ -186,12 +186,19 @@ before_install
 
 最后，就是在`after_success`周期中，添加上传服务器的指令即可，在这里要注意，如果没有`stricthostkeychecking=no`参数，将构建失败，详细原因请参考[通过travis部署代码到远程服务器](http://blog.csdn.net/qq8427003/article/details/64921238)
 
-```
+```bash
 # 由于我修改了默认的port，所以在这里也进行了加密处理
-- scp -o stricthostkeychecking=no -P $PORT -r public/* root@www.godi13.com:/usr/local/src/Godi13
+- scp -o stricthostkeychecking=no -P $PORT -r public/* 用户@域名:/路径
 ```
 
-这里放上我最终的[.travis.yml](https://github.com/Godi13/Godi13.github.io/blob/source/.travis.yml)配置参数，希望本文对大家能有所帮助
+但使用`scp`有很多问题，所以后来我决定改用`rsync`命令，缺点是端口号就不能用travis环境来加密了，如果哪个朋友有更好的方案希望能告诉我
+
+```bash
+# public 后面加上/即可将该目录下的文件都传送到服务器了
+- rsync -rv --delete -e 'ssh -p 端口号' public/ 用户@域名:/路径
+```
+
+最后在这里放上我最终的[.travis.yml](https://github.com/Godi13/Godi13.github.io/blob/source/.travis.yml)配置参数，希望本文对大家能有所帮助
 
 # 参考资料
 
