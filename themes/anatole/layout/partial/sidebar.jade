@@ -1,0 +1,27 @@
+.sidebar.animated.fadeInDown
+  .logo-title
+    .title
+      h3(title="")
+        a(href="/")= config.subtitle
+      if config.description
+        .description
+          p= config.description
+
+  //- ul.social-links
+  //-   if theme.twitter
+  //-     li
+  //-       a(href="https://twitter.com/" + theme.twitter)
+  //-         i.fa.fa-twitter
+  //-   if theme.instagram
+  //-     li
+  //-       a(href="http://instagram.com/" + theme.instagram)
+  //-         i.fa.fa-instagram
+  //-   if theme.rss
+  //-     li
+  //-       a(href= url_for(theme.rss))
+  //-         i.fa.fa-rss
+  //-   if theme.weibo
+  //-     li
+  //-       a(href="http://weibo.com/" + theme.weibo)
+  //-         i.fa.fa-weibo
+  include footer

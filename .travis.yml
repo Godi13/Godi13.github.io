@@ -1,0 +1,33 @@
+language: node_js
+node_js: stable
+branches:
+  only:
+  - source
+cache:
+  apt: true
+  yarn: true
+  directories:
+  - node_modules
+before_install:
+- openssl aes-256-cbc -K $encrypted_97d432d3ed20_key -iv $encrypted_97d432d3ed20_iv
+  -in id_rsa.enc -out ~/.ssh/id_rsa -d
+- chmod 600 ~/.ssh/id_rsa
+- echo -e "Host 101.200.36.88\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
+- git config --global user.name "Godi13"
+- git config --global user.email "mqzq9388@gmail.com"
+- curl -o- -L https://yarnpkg.com/install.sh | bash
+- export PATH=$HOME/.yarn/bin:$PATH
+- npm install -g hexo-cli
+install:
+- yarn
+script:
+- hexo clean
+- hexo generate
+after_success:
+- scp -o stricthostkeychecking=no -P $PORT -r public/* root@www.godi13.com:/usr/local/src/Blog
+- cd ./public
+- git init
+- git add --all .
+- git commit -m "Travis CI Auto Builder"
+- git push --quiet --force https://$REPO_TOKEN@github.com/Godi13/Godi13.github.io.git
+  master
