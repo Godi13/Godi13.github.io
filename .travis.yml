@@ -24,7 +24,7 @@ script:
 - hexo clean
 - hexo generate
 after_success:
-- scp -o stricthostkeychecking=no -P $PORT -r public/* root@www.godi13.com:/usr/local/src/Blog
+- rsync -rv --delete -e 'ssh -p $PORT' public/ root@www.godi13.com:/usr/local/src/Blog
 - cd ./public
 - git init
 - git add --all .
