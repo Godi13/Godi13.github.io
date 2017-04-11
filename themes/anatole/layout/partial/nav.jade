@@ -1,5 +1,5 @@
 .page-top.animated.fadeInDown
-  .nav
+  ul.nav
     li
       if is_home()
         a.current(href="/")= __('Home')					
@@ -26,7 +26,7 @@
       a(href="http://www.jianshu.com/u/9ed764919527")=__('简书')
   .information
     .back_btn
-      li
+      span
         if is_post()
           a.fa.fa-chevron-left(onclick="window.history.go(-1)") 
         else

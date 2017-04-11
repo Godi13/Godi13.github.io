@@ -17,56 +17,56 @@ categories:
 - 由于我的`.travis.yml`配置文件里设置监听的就是`source`分支，所以会触发`webhook`
 - `Travis`则会将该项目`clone`过去，然后按照`.travis.yml`的设置执行接下来的命令
 - 执行完成后，再将编译好的文件们发送到自己的服务器，顺便`push`回`master`分支上来
-- 这样就可以在[www.godi13.com](http://www.godi13.com)和[Godi13.github.io](http://godi13.github.io/)上都访问blog了
+- 这样就可以在[blog.godi13.com](http://blog.godi13.com)和[Godi13.github.io](http://godi13.github.io/)上都访问blog了
 
 # Github
 
 首先，按规定名称`XXXXX.github.io`，其中`XXXXX`为你的用户名，如下图中的`Godi13.github.io`创建项目
 
-![创建github项目](http://oo5cjqz2p.bkt.clouddn.com/2017-04-10-githubio.png-total)
+![创建github项目](http://images.godi13.com/2017-04-10-githubio.png-total)
 
 为了使`travis`能够将编译好的文件们`push`回咱们的github，我们需要生成`token`，步骤如下：
 
 1) 点击右上方头像，然后点`setting`
 
-![githubsetting](http://oo5cjqz2p.bkt.clouddn.com/2017-04-10-setting.png-small
+![githubsetting](http://images.godi13.com/2017-04-10-setting.png-small
 )
 
 2) 点击`Personal access tokens`
 
-![](http://oo5cjqz2p.bkt.clouddn.com/2017-04-10-token.png-small
+![](http://images.godi13.com/2017-04-10-token.png-small
 )
 
 3) 点击`Generate new token`
 
-![](http://oo5cjqz2p.bkt.clouddn.com/2017-04-10-token2.png
+![](http://images.godi13.com/2017-04-10-token2.png
 -total)
 
 4) 为`token`起一个名字，勾选`repo`，然后点击生成
 
-![](http://oo5cjqz2p.bkt.clouddn.com/2017-04-10-repo.png
+![](http://images.godi13.com/2017-04-10-repo.png
 -total)
 
 <div class="tip">生成`token`以后，一定要复制好，因为只显示一次，如果丢失只能再次生成了</div>
 
-![](http://oo5cjqz2p.bkt.clouddn.com/2017-04-10-copytoken.png
+![](http://images.godi13.com/2017-04-10-copytoken.png
 )
 
 # Travis
 
 1) 使用`github`帐号登录[Travis](https://travis-ci.org/)，右上方按钮点击同步项目，下方打开需要集成的项目，最后点击齿轮进入项目配置页面
 
-![在travis同步](http://oo5cjqz2p.bkt.clouddn.com/2017-04-10-travisfirst.png
+![在travis同步](http://images.godi13.com/2017-04-10-travisfirst.png
 )
 
 2) 打开`Build only if .travis.yml is present`，右下角的那个其实也可以关了，然后往下移动页面到环境变量
 
-![](http://oo5cjqz2p.bkt.clouddn.com/2017-04-10-present.png
+![](http://images.godi13.com/2017-04-10-present.png
 )
 
 3) 在这里我将变量名称名为`REPO_TOKEN`，放上`token`，点击`Add`按钮
 
-![](http://oo5cjqz2p.bkt.clouddn.com/2017-04-10-value.png
+![](http://images.godi13.com/2017-04-10-value.png
 )
 
 # Terminal
@@ -129,7 +129,7 @@ git push
 
 如最终成功则会看到
 
-![](http://oo5cjqz2p.bkt.clouddn.com/2017-04-10-success.png
+![](http://images.godi13.com/2017-04-10-success.png
 )
 
 到这里关于hexo和github的事情就先吿一段落，接下来就是服务器与tarvis
@@ -162,7 +162,7 @@ travis encrypt-file ~/.ssh/id_rsa --add
 
 执行完以后会发现在`travis`网站项目里面的环境变量里多了两个参数
 
-![](http://oo5cjqz2p.bkt.clouddn.com/2017-04-10-sshkey.png
+![](http://images.godi13.com/2017-04-10-sshkey.png
 )
 
 并且在`.travis.yml`里的`before_install`周期中多了下面这2行
@@ -181,7 +181,7 @@ before_install
 - openssl aes-256-cbc -K $encrypted_97d432d3ed20_key -iv $encrypted_97d432d3ed20_iv
   -in id_rsa.enc -out ~/.ssh/id_rsa -d
 - chmod 600 ~/.ssh/id_rsa
-- echo -e "Host 主机Ip地址\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
+- echo -e "Host 主机IP地址\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
 ```
 
 最后，就是在`after_success`周期中，添加上传服务器的指令即可，在这里要注意，如果没有`stricthostkeychecking=no`参数，将构建失败，详细原因请参考[通过travis部署代码到远程服务器](http://blog.csdn.net/qq8427003/article/details/64921238)
