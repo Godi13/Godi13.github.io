@@ -191,7 +191,7 @@ before_install
 - scp -o stricthostkeychecking=no -P $PORT -r public/* 用户@域名:/路径
 ```
 
-但使用`scp`有很多问题，所以后来我决定改用`rsync`命令，缺点是端口号就不能用travis环境来加密了，如果哪个朋友有更好的方案希望能告诉我
+但使用`scp`有很多问题，所以后来我决定改用`rsync`命令，缺点是端口号就不能用travis环境来加密了，如果哪个朋友有更好的方案希望能告诉我，关于`rsync`请参考[介绍 rsync 数据同步工具](http://haoduoshipin.com/v/48.html)
 
 ```bash
 # public 后面加上/即可将该目录下的文件都传送到服务器了
