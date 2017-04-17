@@ -29,13 +29,11 @@ categories:
 
 1) 点击右上方头像，然后点`setting`
 
-![githubsetting](http://images.godi13.com/2017-04-10-setting.png-small
-)
+![githubsetting](http://images.godi13.com/2017-04-10-setting.png-small)
 
 2) 点击`Personal access tokens`
 
-![](http://images.godi13.com/2017-04-10-token.png-small
-)
+![](http://images.godi13.com/2017-04-10-token.png-small)
 
 3) 点击`Generate new token`
 
@@ -49,25 +47,21 @@ categories:
 
 <div class="tip">生成`token`以后，一定要复制好，因为只显示一次，如果丢失只能再次生成了</div>
 
-![](http://images.godi13.com/2017-04-10-copytoken.png
-)
+![](http://images.godi13.com/2017-04-10-copytoken.png)
 
 # Travis
 
 1) 使用`github`帐号登录[Travis](https://travis-ci.org/)，右上方按钮点击同步项目，下方打开需要集成的项目，最后点击齿轮进入项目配置页面
 
-![在travis同步](http://images.godi13.com/2017-04-10-travisfirst.png
-)
+![在travis同步](http://images.godi13.com/2017-04-10-travisfirst.png)
 
 2) 打开`Build only if .travis.yml is present`，右下角的那个其实也可以关了，然后往下移动页面到环境变量
 
-![](http://images.godi13.com/2017-04-10-present.png
-)
+![](http://images.godi13.com/2017-04-10-present.png)
 
 3) 在这里我将变量名称名为`REPO_TOKEN`，放上`token`，点击`Add`按钮
 
-![](http://images.godi13.com/2017-04-10-value.png
-)
+![](http://images.godi13.com/2017-04-10-value.png)
 
 # Terminal
 
@@ -129,8 +123,7 @@ git push
 
 如最终成功则会看到
 
-![](http://images.godi13.com/2017-04-10-success.png
-)
+![](http://images.godi13.com/2017-04-10-success.png)
 
 到这里关于hexo和github的事情就先吿一段落，接下来就是服务器与tarvis
 
@@ -162,8 +155,7 @@ travis encrypt-file ~/.ssh/id_rsa --add
 
 执行完以后会发现在`travis`网站项目里面的环境变量里多了两个参数
 
-![](http://images.godi13.com/2017-04-10-sshkey.png
-)
+![](http://images.godi13.com/2017-04-10-sshkey.png)
 
 并且在`.travis.yml`里的`before_install`周期中多了下面这2行
 
