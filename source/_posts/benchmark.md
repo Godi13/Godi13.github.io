@@ -52,9 +52,11 @@ var x 49,310,969 ops/sec ±0.96% (90 runs sampled)
 Fastest is var
 ```
 
-这些不测一测是不会知道有这么明显的差异的，接下来就是分析为什么了，这我就先不写了
+这些不测一测是不会知道有这么明显的差异的，接下来就是分析为什么了，~~这我就先不写了，~~最近在看了[《You-Dont-Know-JS》系列](https://github.com/getify/You-Dont-Know-JS/tree/1ed-zh-CN)的时候找到了答案(这个开源书真不错，会从编译器角度来讲解JS的一些行为，真应该早点看看)
 
-有兴趣的朋友可以到这[http://jsperf.com/browse](http://jsperf.com/browse)看看，里面有250个最新的网友们的测试，昨天我随意点进去两个看了下，其中之一在测试有`console.log`跟没有之间的差别，还有一个测试了各种`DOM`选择方式的差异
+> 用于for循环头部的let声明被定义了一种特殊行为。这种行为说，这个变量将不是只为循环声明一次，而是为每次迭代声明一次。并且，它将在每次后续的迭代中被上一次迭代末尾的值初始化。 —— [你不懂JS：作用域与闭包-第五章：作用域闭包](https://github.com/getify/You-Dont-Know-JS/blob/1ed-zh-CN/scope%20%26%20closures/ch5.md#重温块儿作用域)
+
+有兴趣的朋友还可以到这[http://jsperf.com/browse](http://jsperf.com/browse)看看，里面有250个最新的网友们的测试，昨天我随意点进去两个看了下，其中之一在测试有`console.log`跟没有之间的差别，还有一个测试了各种`DOM`选择方式的差异
 
 还有很多更好的用法，可以参考这些github项目[fast-js](https://github.com/alsotang/fast-js)、[fast.js](https://github.com/codemix/fast.js)
 
